@@ -1,19 +1,21 @@
 {
-  "author": "Theo Ephraim <theozero@gmail.com> (http://theoephraim.com)",
-  "name": "google-spreadsheet",
-  "description": "Google Spreadsheet Data API -- simple interface to read/write rows + cells",
-  "version": "1.0.1",
+  "author": "Heitor Tashiro Sergent <h@heitor.io>",
+  "name": "google-drive-sheets",
+  "description": "Google Sheets API -- simple interface to interact with Google Sheets",
+  "version": "1.0.0",
   "keywords": [
     "google",
+    "drive",
     "spreadsheet",
     "spreadsheets",
+    "sheets",
     "gdata",
     "api"
   ],
-  "homepage": "https://github.com/theoephraim/node-google-spreadsheet",
+  "homepage": "https://github.com/heitortsergent/google-drive-sheets",
   "repository": {
     "type": "git",
-    "url": "git://github.com/theoephraim/node-google-spreadsheet.git"
+    "url": "git://github.com/heitortsergent/google-drive-sheets.git"
   },
   "main": "index.js",
   "engines": {
