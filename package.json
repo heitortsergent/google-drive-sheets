@@ -2,7 +2,7 @@
   "author": "Heitor Tashiro Sergent <h@heitor.io>",
   "name": "google-drive-sheets",
   "description": "Google Sheets API -- simple interface to interact with Google Sheets",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "keywords": [
     "google",
     "drive",
