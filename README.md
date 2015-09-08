@@ -3,6 +3,9 @@
 [![Build Status via Travis CI](https://travis-ci.org/heitortsergent/google-drive-sheets.svg?branch=master)](https://travis-ci.org/heitortsergent/google-drive-sheets)
 [![NPM version](http://img.shields.io/npm/v/google-drive-sheets.svg)](https://www.npmjs.org/package/google-drive-sheets)
 
+[![Dependency Status](https://david-dm.org/heitortsergent/google-drive-sheets.svg)](https://david-dm.org/heitortsergent/google-drive-sheets)
+[![devDependency Status](https://david-dm.org/heitortsergent/google-drive-sheets/dev-status.svg)](https://david-dm.org/heitortsergent/google-drive-sheets#info=devDependencies)
+
 A simple Node.js library to read and manipulate data in Google Spreadsheets.
 
 Works without authentication for read-only sheets or with auth for adding/editing/deleting data.
