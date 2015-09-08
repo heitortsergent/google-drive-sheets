@@ -14,10 +14,11 @@ Please don't do that...
 
 /*jshint -W117 */
 
+require('dotenv').load();
+
 var async = require('async');
 var GoogleSheets = require('../index.js');
-var doc = new GoogleSheets('148tpVrZgcc-ReSMRXiQaqf9hstgT8HTzyPeKx6f399Y');
-var creds = require('./test_creds');
+var doc = new GoogleSheets(process.env.GOOGLE_SPREADSHEET_ID);
 var sheet;
 var chai = require('chai');
 var expect = chai.expect;
@@ -26,23 +27,30 @@ var should = chai.should();
 describe('Spreadsheet', function() {
   this.timeout(5000);
 
-  describe('#getInfo()', function() {
-    it('should get Spreadsheet information', function(done) {
-      doc.getInfo(function(err, sheetInfo) {
-        // even with public read/write sheet author should stay constant
-        sheetInfo.author.email.should.equal('theozero@gmail.com');
-
-        sheet = sheetInfo.worksheets[0];
-        sheet.title.should.equal('Sheet1');
-
+  describe('#useServiceAccountAuth', function() {
+    it('should authenticate', function(done) {
+      var creds = {
+        /* jshint camelcase: false */
+        /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+        client_email: process.env.CLIENT_EMAIL,
+        private_key: process.env.PRIVATE_KEY,
+        /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+      };
+      doc.useServiceAccountAuth(creds, function(err) {
         done(err);
       });
     });
   });
 
-  describe('#useServiceAccountAuth', function() {
-    it('should authenticate', function(done) {
-      doc.useServiceAccountAuth(creds, function(err) {
+  describe('#getInfo()', function() {
+    it('should get Spreadsheet information', function(done) {
+      doc.getInfo(function(err, sheetInfo) {
+        // even with public read/write sheet author should stay constant
+        sheetInfo.author.email.should.equal('heitortsergent@gmail.com');
+
+        sheet = sheetInfo.worksheets[0];
+        sheet.title.should.equal('Sheet1');
+
         done(err);
       });
     });
