@@ -1,7 +1,9 @@
 # Google Drive Sheets
 
-[![Build Status via Travis CI](https://travis-ci.org/heitortsergent/google-drive-sheets.svg?branch=master)](https://travis-ci.org/heitortsergent/google-drive-sheets)
 [![NPM version](http://img.shields.io/npm/v/google-drive-sheets.svg)](https://www.npmjs.org/package/google-drive-sheets)
+
+[![Build Status via Travis CI](https://travis-ci.org/heitortsergent/google-drive-sheets.svg?branch=master)](https://travis-ci.org/heitortsergent/google-drive-sheets)
+[![Coverage Status](https://coveralls.io/repos/heitortsergent/google-drive-sheets/badge.svg?branch=master&service=github)](https://coveralls.io/github/heitortsergent/google-drive-sheets?branch=master)
 
 [![Dependency Status](https://david-dm.org/heitortsergent/google-drive-sheets.svg)](https://david-dm.org/heitortsergent/google-drive-sheets)
 [![devDependency Status](https://david-dm.org/heitortsergent/google-drive-sheets/dev-status.svg)](https://david-dm.org/heitortsergent/google-drive-sheets#info=devDependencies)
