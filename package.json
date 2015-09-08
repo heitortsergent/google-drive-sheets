@@ -29,11 +29,15 @@
     "xml2js": "~0.4.0"
   },
   "devDependencies": {
-    "async": "~0.2.9",
+    "async": "*",
     "chai": "*",
-    "mocha": "*"
+    "coveralls": "*",
+    "istanbul": "*",
+    "mocha": "*",
+    "mocha-lcov-reporter": "*"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha ./test/*",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
   }
 }

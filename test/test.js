@@ -73,10 +73,6 @@ describe('Spreadsheet', function() {
     });
   });
 
-  // describe('#getRows', function() {
-  //
-  // });
-
   describe('#addRow', function() {
     it('should check if row was added', function(done) {
       async.waterfall([
@@ -125,10 +121,6 @@ describe('Spreadsheet', function() {
       ], done);
     });
   });
-
-  // describe('#addRows', function() {
-  //
-  // });
 
   // TODO - test cell based feeds
 });
