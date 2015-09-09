@@ -60,24 +60,18 @@ describe('Spreadsheet', function() {
     it('should clear all rows', function(done) {
       sheet.getRows(function(err, rows) {
         if (rows.length === 0) return done(err);
-        async.each(rows, function(row, cb) {
+        rows.reverse();
+        async.eachSeries(rows, function(row, cb) {
           row.del(cb);
         }, done);
       });
     });
 
     it('should check if rows are empty', function(done) {
-      async.waterfall([
-        function read(cb) {
-          sheet.getRows(cb);
-        },
-
-        function check(rows, cb) {
-          rows.length.should.equal(0);
-          cb();
-        },
-
-      ], done);
+      sheet.getRows(function(err, rows) {
+        rows.length.should.equal(0);
+        done(err);
+      });
     });
   });
 
