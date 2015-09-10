@@ -15,6 +15,13 @@ Supports both list-based and cell-based feeds.
 
 You can find more information about the Google Sheets API [here](https://developers.google.com/google-apps/spreadsheets/).
 
+* [Installation](#installation)
+* [Basic Usage](#basic-usage)
+* [Authentication](#authentication)
+* [API](#api)
+* [Further possibilities & to-do](#further-possibilities--to-do)
+* [Thanks](#thanks)
+
 ## Installation
 
 ```sh
@@ -75,25 +82,15 @@ mySheet.useServiceAccountAuth(creds, function(err) {
 
 ## Authentication
 
-IMPORTANT: Google recently deprecated their ClientLogin (username+password)
-access, so things are slightly more complicated now. Older versions of this
-module supported it, so just be aware that things changed.
-
 ### Unauthenticated access (read-only access on public docs)
 
 By default, this module makes unauthenticated requests and can therefore
 only access spreadsheets that are "public".
 
-The Google Spreadsheets Data API reference and developers guide is a little
-ambiguous about how you access a "published" public Spreadsheet.
-
 If you wish to work with a Google Spreadsheet without authenticating, not only
 must the Spreadsheet in question be visible to the web, but it must also have
 been explicitly published using "File > Publish to the web" menu option in
 the google spreadsheets GUI.
-
-Many seemingly "public" sheets have not also been "published" so this may
-cause some confusion.
 
 
 ### Service Account (recommended method)
@@ -104,22 +101,20 @@ Use this for an app that needs to access a set of documents that you have full a
 
 __Setup Instructions__
 
-1. Go to the [Google Developers Console](https://console.developers.google.com/project)
-2. Select your project or create a new one (and then select it)
-3. Enable the Drive API for your project
-  - In the sidebar on the left, expand __APIs & auth__ > __APIs__
-  - Search for "drive"
-  - Click on "Drive API"
-  - click the blue "Enable API" button
-4. Create a service account for your project
-  - In the sidebar on the left, expand __APIs & auth__ > __Credentials__
-  - Click "Create new Client ID" button
-  - select the "Service account" option
-  - click "Create Client ID" button to continue
-  - when the dialog appears click "Okay, got it"
-  - your JSON key file is generated and downloaded to your machine (__it is the only copy!__)
-  - note your service account's email address (also available in the JSON key file)
-5. Share the doc (or docs) with your service account using the email noted above
+1. Go to the [Google Developers Console](https://console.developers.google.com/project).
+2. Select your project, or create a new one and then select it.
+3. Enable the Drive API for your project.
+  - In the sidebar on the left, expand __APIs & auth__ > __APIs__.
+  - Search for "Drive".
+  - Click on "Drive API".
+  - Click the "Enable API" button.
+4. Create a service account for your project.
+  - In the sidebar on the left, expand __APIs & auth__ > __Credentials__.
+  - Click the "Add credentials" button and select the "Service account" option.
+  - Select "JSON" under "Key type" and click the "Create" button.
+  - Your JSON key file is generated and downloaded to your machine (__it is the only copy!__).
+  - Note your service account's email address in the next screen (also available in the JSON key file).
+5. Share the doc (or docs) with your service account using the email shown above.
 
 
 ## API
