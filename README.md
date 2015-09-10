@@ -271,4 +271,4 @@ Clear the cell -- internally just calls `.setValue('', callback)`
 
 This is based of the code by [samcday](https://github.com/theoephraim). Original version [here](https://github.com/theoephraim/node-google-spreadsheet)
 
-## License
+### [License](LICENSE)
