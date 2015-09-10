@@ -1,6 +1,6 @@
 # Google Drive Sheets
 
-[![NPM version](http://img.shields.io/npm/v/google-drive-sheets.svg)](https://www.npmjs.org/package/google-drive-sheets)
+[![NPM version](http://img.shields.io/npm/v/google-drive-sheets.svg)](https://www.npmjs.org/package/google-drive-sheets) [![npm](https://img.shields.io/npm/l/express.svg)](LICENSE)
 
 [![Build Status via Travis CI](https://travis-ci.org/heitortsergent/google-drive-sheets.svg?branch=master)](https://travis-ci.org/heitortsergent/google-drive-sheets)
 [![Coverage Status](https://coveralls.io/repos/heitortsergent/google-drive-sheets/badge.svg?branch=master&service=github)](https://coveralls.io/github/heitortsergent/google-drive-sheets?branch=master)
@@ -265,5 +265,3 @@ Clear the cell -- internally just calls `.setValue('', callback)`
 ## Thanks
 
 This is based of the code by [samcday](https://github.com/theoephraim). Original version [here](https://github.com/theoephraim/node-google-spreadsheet)
-
-### [License](LICENSE)
