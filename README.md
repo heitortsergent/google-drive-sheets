@@ -22,11 +22,13 @@ You can find more information about the Google Sheets API [here](https://develop
 * [Further possibilities & to-do](#further-possibilities--to-do)
 * [Thanks](#thanks)
 
+
 ## Installation
 
 ```sh
 $ npm install --save google-drive-sheets
 ```
+
 
 ## Basic Usage
 
@@ -80,6 +82,7 @@ mySheet.useServiceAccountAuth(creds, function(err) {
 })
 ```
 
+
 ## Authentication
 
 ### Unauthenticated access (read-only access on public docs)
@@ -91,7 +94,6 @@ If you wish to work with a Google Spreadsheet without authenticating, not only
 must the Spreadsheet in question be visible to the web, but it must also have
 been explicitly published using "File > Publish to the web" menu option in
 the google spreadsheets GUI.
-
 
 ### Service Account (recommended method)
 
@@ -123,7 +125,6 @@ __Setup Instructions__
 
 The main class that represents an entire spreadsheet.
 
-
 #### `new GoogleSheets(sheet_id, [auth], [options])`
 
 Create a new Google spreadsheet object.
@@ -133,8 +134,6 @@ Create a new Google spreadsheet object.
 - `options` - (optional)
   - `visibility` - defaults to `public` if anonymous
   - `projection` - defaults to `values` if anonymous
-
-
 
 #### `GoogleSheets.useServiceAccountAuth(account_info, callback)`
 
@@ -149,12 +148,9 @@ If you are using heroku or another environment where you cannot save a local fil
 
 Internally, this uses a JWT client to generate a new auth token for your service account that is valid for 1 hour. The token will be automatically regenerated when it expires.
 
-
 #### `GoogleSheets.setAuthToken(id)`
 
 Use an already created auth token for all future requets.
-
-
 
 #### `GoogleSheets.getInfo(callback)`
 
@@ -166,8 +162,6 @@ Get information about the spreadsheet. Calls callback passing an object that con
   - `name` - author name
   - `email` - author email
 - `worksheets` - an array of `SpreadsheetWorksheet` objects (see below)
-
-
 
 #### `GoogleSheets.getRows(worksheetId, options, callback)`
 
@@ -182,8 +176,6 @@ Get an array of row objects from the sheet.
   - `query` - send a structured query for rows ([more info](https://developers.google.com/google-apps/spreadsheets/#sending_a_structured_query_for_rows))
 - `callback(err, rows)` - will be called with an array of row objects (see below)
 
-
-
 #### `GoogleSheets.addRow(worksheetId, new_row, callback)`
 
 Add a single row to the sheet.
@@ -191,8 +183,6 @@ Add a single row to the sheet.
 - `worksheetId` - the index of the sheet to add to (index starts at 1)
 - `new_row` - key-value object to add - keys must match the header row on your sheet
 - `callback(err)` - callback called after row is added
-
-
 
 #### `GoogleSheets.getCells(worksheetId, options, callback)`
 
@@ -204,7 +194,6 @@ Get an array of cell objects.
   - `min-col` - column range min (uses numbers, not letters!)
   - `max-col` - column range max
   - `return-empty` - include empty cells (boolean)
-
 
 ----------------------------------
 
@@ -221,46 +210,56 @@ __Properties:__
 - `colCount` - number of columns
 
 ### `SpreadsheetWorksheet.getRows(options, callback)`
+
 See above.
 
 ### `SpreadsheetWorksheet.getCells(options, callback)`
+
 See above.
 
 ### `SpreadsheetWorksheet.addRow(new_row, callback)`
+
 See above.
 
 ----------------------------------
 
 ### `SpreadsheetRow`
+
 Represents a single row from a sheet.
 
 You can treat the row as a normal javascript object. Object keys will be from the header row of your sheet, however the Google API mangles the names a bit to make them simpler. It's easiest if you just use all lowercase keys to begin with.
 
 #### `SpreadsheetRow.save( callback )`
+
 Saves any changes made to the row's values.
 
 #### `SpreadsheetRow.del( callback )`
+
 Deletes the row from the sheet.
 
 ----------------------------------
 
 ### `SpreadsheetCell`
+
 Represents a single cell from the sheet.
 
 #### `SpreadsheetCell.setValue(val, callback)`
+
 Set the value of the cell and save it.
 
 #### `SpreadsheetCell.del(callback)`
+
 Clear the cell -- internally just calls `.setValue('', callback)`
 
-
 ----------------------------------
+
 
 ## Further possibilities & to-do
 
 - Batch requests for cell based updates
 - Modifying worksheet/spreadsheet properties
 - Getting list of available spreadsheets for an authenticated user
+
 
 ## Thanks
 
