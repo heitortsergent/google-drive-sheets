@@ -19,6 +19,7 @@ var async = require('async');
 var GoogleSheets = require('../lib/index.js');
 var doc = new GoogleSheets(process.env.GOOGLE_SPREADSHEET_ID);
 var sheet;
+var worksheet;
 
 var chai = require('chai');
 var expect = chai.expect; // jshint ignore:line
@@ -46,48 +47,63 @@ describe('Spreadsheet', function() {
     it('should get Spreadsheet information', function(done) {
       doc.getInfo(function(err, sheetInfo) {
         // even with public read/write sheet author should stay constant
-        sheetInfo.author.email.should.equal('heitortsergent@gmail.com');
+        sheet = sheetInfo;
+        sheet.author.email.should.equal('heitortsergent@gmail.com');
 
-        sheet = sheetInfo.worksheets[0];
-        sheet.title.should.equal('Sheet1');
+        worksheet = sheetInfo.worksheets[0];
+        worksheet.title.should.equal('Sheet1');
 
         done(err);
       });
     });
   });
 
-  describe('#getRows', function() {
-    it('should clear all rows', function(done) {
-      sheet.getRows(function(err, rows) {
-        if (rows.length === 0) return done(err);
-        rows.reverse();
-        async.eachSeries(rows, function(row, cb) {
-          row.del(cb);
-        }, done);
-      });
-    });
+  describe('#worksheets', function() {
+    it('should add a worksheet', function(done) {
+      doc.addWorksheet('AwesomeSheet', function(err) {
+        if (err) done(err);
+        doc.getInfo(function(err, sheetInfo) {
+          // even with public read/write sheet author should stay constant
+          sheet = sheetInfo;
 
-    it('should check if rows are empty', function(done) {
-      sheet.getRows(function(err, rows) {
-        rows.length.should.equal(0);
-        done(err);
+          sheetInfo.worksheets.should.have.length(2);
+          worksheet = sheetInfo.worksheets[1];
+          worksheet.title.should.equal('AwesomeSheet');
+
+          done(err);
+        });
       });
     });
   });
 
   describe('#addRow', function() {
+    it('should add first row for headers', function(done) {
+      worksheet.getCells({ 'min-row': 1, 'max-row': 1,
+                           'max-col': 2, 'return-empty': true, },
+                           function(err, cells) {
+        if (err) done(err);
+
+        async.forEachOf(cells, function(cell, key, callback) {
+          cell.setValue('col' + (key + 1), callback);
+        },
+
+        done);
+      });
+    });
+
     it('should check if row was added', function(done) {
       async.waterfall([
         function write(cb) {
           // NOTE -- key and val are arbitrary headers.
           // These are the column headers in the first row of the spreadsheet.
-          sheet.addRow({ col1: 'test-col1', col2: 'test-col2' }, function(err) {
-            cb(err);
-          });
+          worksheet.addRow({ col1: 'test-col1', col2: 'test-col2' },
+            function(err) {
+              cb(err);
+            });
         },
 
         function read(cb) {
-          sheet.getRows(cb);
+          worksheet.getRows(cb);
         },
 
         function check(rows, cb) {
@@ -102,7 +118,7 @@ describe('Spreadsheet', function() {
     it('should add and read newlines', function(done) {
       async.waterfall([
         function write(cb) {
-          sheet.addRow({ col1: 'Newline\ntest',
+          worksheet.addRow({ col1: 'Newline\ntest',
                          col2: 'Double\n\nnewline test', },
           function() {
             cb();
@@ -110,7 +126,7 @@ describe('Spreadsheet', function() {
         },
 
         function read(cb) {
-          sheet.getRows(cb);
+          worksheet.getRows(cb);
         },
 
         function check(rows, cb) {
@@ -121,6 +137,31 @@ describe('Spreadsheet', function() {
         },
 
       ], done);
+    });
+  });
+
+  describe('#getRows', function() {
+    it('should clear all rows except for headers', function(done) {
+      worksheet.getRows(function(err, rows) {
+        if (rows.length === 0) return done(err);
+        rows.reverse();
+        async.eachSeries(rows, function(row, cb) {
+          row.del(cb);
+        }, done);
+      });
+    });
+
+    it('should check if rows are empty except for headers', function(done) {
+      worksheet.getRows(function(err, rows) {
+        rows.length.should.equal(0);
+        done(err);
+      });
+    });
+  });
+
+  describe('#worksheets', function() {
+    it('should delete a worksheet', function(done) {
+      worksheet.delete(done);
     });
   });
 
