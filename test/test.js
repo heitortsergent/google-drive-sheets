@@ -1,9 +1,8 @@
 'use strict';
 
 /*jshint -W101 */
-/*jshint -W098 */
 /*
-These tests use the test spreadsheet accessible at https://docs.google.com/spreadsheets/d/148tpVrZgcc-ReSMRXiQaqf9hstgT8HTzyPeKx6f399Y/edit#gid=0
+These tests use the test spreadsheet accessible at https://docs.google.com/spreadsheets/d/148tpVrZgcc-ReSMRXiQaqf9hstgT8HTzyPeKx6f399Y/edit#gid=0 // jshint ignore:line
 
 In order to allow other devs to test both read and write funcitonality,
 the doc must be public read/write which means if someone feels like it,
@@ -17,12 +16,13 @@ Please don't do that...
 require('dotenv').load();
 
 var async = require('async');
-var GoogleSheets = require('../index.js');
+var GoogleSheets = require('../lib/index.js');
 var doc = new GoogleSheets(process.env.GOOGLE_SPREADSHEET_ID);
 var sheet;
+
 var chai = require('chai');
-var expect = chai.expect;
-var should = chai.should();
+var expect = chai.expect; // jshint ignore:line
+var should = chai.should(); // jshint ignore:line
 
 describe('Spreadsheet', function() {
   this.timeout(5000);
