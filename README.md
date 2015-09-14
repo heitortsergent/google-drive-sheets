@@ -116,7 +116,11 @@ __Setup Instructions__
   - Select "JSON" under "Key type" and click the "Create" button.
   - Your JSON key file is generated and downloaded to your machine (__it is the only copy!__).
   - Note your service account's email address in the next screen (also available in the JSON key file).
-5. Share the doc (or docs) with your service account using the email shown above.
+5. Share the doc (or docs) with your service account using the email shown above. The email format should look similar to:
+
+```
+1032985794852-9f1hf98hf9183hf1038fh013h0vh0v1n@developer.gserviceaccount.com
+```
 
 
 ## API
