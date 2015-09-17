@@ -63,14 +63,38 @@ describe('Spreadsheet', function() {
       doc.addWorksheet('AwesomeSheet', function(err) {
         if (err) done(err);
         doc.getInfo(function(err, sheetInfo) {
-          // even with public read/write sheet author should stay constant
+          if (err) done(err);
+
           sheet = sheetInfo;
 
           sheetInfo.worksheets.should.have.length(2);
           worksheet = sheetInfo.worksheets[1];
           worksheet.title.should.equal('AwesomeSheet');
 
-          done(err);
+          done();
+        });
+      });
+    });
+
+    it('should update a worksheet', function(done) {
+      var updatedWorksheetTitle = 'UpdatedTitle';
+      var newRowCount = 10;
+      var newColCount = 15;
+      worksheet.update(updatedWorksheetTitle, newRowCount, newColCount,
+                                                                function(err) {
+        if (err) done(err);
+
+        doc.getInfo(function(err, sheetInfo) {
+          if (err) done(err);
+
+          sheet = sheetInfo;
+
+          worksheet = sheetInfo.worksheets[1];
+          worksheet.title.should.equal(updatedWorksheetTitle);
+          worksheet.rowCount.should.equal(newRowCount);
+          worksheet.colCount.should.equal(newColCount);
+
+          done();
         });
       });
     });
