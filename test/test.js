@@ -60,7 +60,11 @@ describe('Spreadsheet', function() {
 
   describe('#worksheets', function() {
     it('should add a worksheet', function(done) {
-      doc.addWorksheet('AwesomeSheet', function(err) {
+      var opts = {
+        title: 'AwesomeSheet',
+      };
+
+      doc.addWorksheet(opts, function(err) {
         if (err) done(err);
         doc.getInfo(function(err, sheetInfo) {
           if (err) done(err);
