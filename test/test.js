@@ -81,11 +81,13 @@ describe('Spreadsheet', function() {
     });
 
     it('should update a worksheet', function(done) {
-      var updatedWorksheetTitle = 'UpdatedTitle';
-      var newRowCount = 10;
-      var newColCount = 15;
-      worksheet.update(updatedWorksheetTitle, newRowCount, newColCount,
-                                                                function(err) {
+      var opts = {
+        title: 'UpdatedTitle',
+        rowCount: 10,
+        colCount: 15,
+      };
+
+      worksheet.update(opts, function(err) {
         if (err) done(err);
 
         doc.getInfo(function(err, sheetInfo) {
@@ -94,9 +96,9 @@ describe('Spreadsheet', function() {
           sheet = sheetInfo;
 
           worksheet = sheetInfo.worksheets[1];
-          worksheet.title.should.equal(updatedWorksheetTitle);
-          worksheet.rowCount.should.equal(newRowCount);
-          worksheet.colCount.should.equal(newColCount);
+          worksheet.title.should.equal(opts.title);
+          worksheet.rowCount.should.equal(opts.rowCount);
+          worksheet.colCount.should.equal(opts.colCount);
 
           done();
         });
